@@ -1,0 +1,15 @@
+#!/bin/bash
+# determines if the battery is charging (plugged in) or discharging (on 
+# battery)
+
+bat=$(upower -e | grep BAT)
+state=$(upower -i $bat | grep state | awk -F ' ' '{print $2}')
+
+if [ "$state" == "charging" ]; then
+    echo -n 🔌 # electric plug emoji
+else
+#elif [ "$state" == "discharging"]; then
+    echo -n 🔋 # battery emoji
+#else
+#    echo -n "!"
+fi

@@ -1,0 +1,60 @@
+{
+	"Accounts": [
+		{
+			"Account": "lizardthunder@dukgo.com",
+			"Proxies": [
+				"tor-auto://"
+			],
+			"Password": "You talkin' to me?",
+			"Port": 5222,
+			"PrivateKeys": [
+				"AAAAAACAt2aOapV43QEERt46MLkiThMuZv0IDsi45Zbn6Nj6iTHwaeg9LXYin1Fw7KLkStp5mNyo5RoY09JOAXPJaRKXAQZpVBG/z0HcTGE4C9BUSTkxEdnIWBIygT+2FsQ5oU9Kad4vr/YMWuzD2ajP47I9HhgQO/rsJXhwuIDrB14XN10AAAAUmtWgyn1N12w29N4bjFm60iVETwsAAACAQf/eCROedvkHp6xG/GqVpk062IeBbBcBxrRIHT8zs8ZY66jlZwKpPT97svSyGcg/LshcraN4ZD4QgcA6Bvxl/vr4pCUTdFoO/3ySXUJF6SZCwkUhfmpwWuhX7+SLeB0SC+nh47ppTOpLnUuVudQ9wW+S7BZ0DsWpb5U/hNJtzIgAAACAdDP26LAhQpQBeU6+gRSOsp4WXXFKzASLDaYTvwQHrghVOu7e9Ex0FnmAXu9URcJSnV7TcYWnCUCZ1VIGooBQjOV96vgiRs2WmXdyiAMwGZKxsdZsRQwHxkHMaAHBlQCho9zTiFAqsC+Ab2nef+DKbhE2cVonHlO+NZMxwtex76oAAAAUeaDgha9glRZv+haPTd5nTAYbqCM="
+			],
+			"Peers": [
+				{
+					"UserID": "baoubwoc@dukgo.com",
+					"Nickname": "",
+					"Fingerprints": [
+						{
+							"FingerprintHex": "44e7d01da180ecc33ab49e8053714001fd73ebfc",
+							"Trusted": true
+						}
+					]
+				},
+				{
+					"UserID": "softrains@dukgo.com",
+					"Nickname": "",
+					"Fingerprints": [
+						{
+							"FingerprintHex": "03c7d167b9474f7787bc6b2549e55ba99b2f56ec",
+							"Trusted": true
+						}
+					]
+				}
+			],
+			"HideStatusUpdates": false,
+			"OTRAutoTearDown": true,
+			"OTRAutoAppendTag": true,
+			"OTRAutoStartSession": true,
+			"AlwaysEncrypt": true,
+			"InstanceTag": 3901520140,
+			"ConnectAutomatically": true,
+			"Certificates": [
+				{
+					"Subject": "duck.co",
+					"Issuer": "COMODO RSA Organization Validation Secure Server CA",
+					"FingerprintHex": "1e65feecf0d36ebadb9d59d239282b83ce93902a65fdecd07bfcbfe91c90e0f3",
+					"FingerprintType": "SHA3-256"
+				}
+			]
+		}
+	],
+	"Bell": false,
+	"ConnectAutomatically": true,
+	"Display": {
+		"MergeAccounts": false,
+		"ShowOnlyOnline": false,
+		"HideFeedbackBar": true
+	},
+	"AdvancedOptions": true
+}

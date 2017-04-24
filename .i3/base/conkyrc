@@ -1,0 +1,21 @@
+-- vim: ts=4 sw=4 noet ai cindent syntax=lua
+conky.config = {
+	background = false,
+	out_to_console = true,
+	out_to_x = false,
+	update_interval = 0.5,
+	total_run_times = 0,
+	short_units = true,
+	pad_percents = 3,
+	override_utf8_locale = true
+}
+
+conky.text = [[
+	[
+    	{"full_text": "${execi 4 ~/.i3/conky-helpers/pluggedin} ${execi 8 upower -i $(upower -e | grep BAT) | grep percent | awk -F ' ' '{print $2}'}", "color":"\%textcolor%"},
+    	{"full_text": "💾 ${memperc}%", "color":"\%textcolor%"},
+    	{"full_text": "💻 ${cpu}%", "color":"\%textcolor%"},
+    	{"full_text": "🌡${execi 8 ~/.i3/conky-helpers/cputemp}°C", "color":"\%textcolor%"},
+		{"full_text": "${time %a, %b %e, %Y at %I:%M:%S %p}","color": "\%textcolor%"}
+	],
+]]

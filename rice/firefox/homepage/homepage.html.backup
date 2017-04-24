@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<!--
+
+    Author:        Twily                                        2015
+    Website:       http://twily.info/
+    Compatibility: Mozilla Firefox, Internet Explorer, Google Chrome
+
+    Search Usage:  "artist!i" will find images for "artist"
+
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title>New Tab</title>
+
+<style type="text/css">
+/*
+    Transition: "transition: .2s ease-out"
+    Margin Top: "margin-top: -75px"
+    Border Rad: "border-radius: 1px"
+*/
+
+:root {
+    --bg-background:  #17181A;
+    --bg-content:     #C8A5A5;    --fg-content:   #4E3E3E;
+    --fg-c-light:     #3E3232;    --fg-l-hover:   #111113;
+    --fg-mnu1:        #D54A56;    --fg-mnu2:      #84BD3F;
+    --fg-mnu3:        #D753A4;    --fg-mnu4:      #6F67E6;
+
+    --menu-width:     129.25px;
+}
+
+html,body {
+    margin: 0; padding: 0; overflow: hidden;
+    width: 100%; height: 100%;
+    font-family: monospace,"Droid Sans", "Liberation Sans", "DejaVu Sans", "Segoe UI", Sans; font-size: 10pt;
+    background: var(--bg-background);
+}
+*:focus  { outline: none; }
+ul, li   { list-style-type: none; margin: 0; padding: 0; }
+textarea { background: transparent; color: var(--fg-c-light); }
+
+a, a:link, a:visited { color: var(--fg-c-light); text-decoration: none; transition: .2s ease-out; }
+a:hover, a:active    { color: var(--fg-l-hover); }
+
+#preview { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+#overlay {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%; z-index: 2;
+    opacity: 1; transition: .5s;
+    background: var(--bg-background);
+    /* Uncomment below and disable 'showPreview' in the javascript to use custom background image */
+    /**/
+    background: url('file:///home/freya/gitlizard/dotfiles/rice/homepage/resources/sylveon_gijinka_transparent.png') no-repeat 100% 30% scroll;
+    background-size: 30%; opacity: .25;
+    /**/
+}
+
+#center { position: relative; width: 100%; height: 100%; }
+#center #content {
+    margin: 0; overflow: visible; width: 100%; height: auto;
+    position: absolute; top: 50%; transform: translate(0,-50%);
+    text-align: center; opacity: 1; z-index: 10; background: transparent; /* var(--bg-background) || transparent */
+}
+
+#q {
+    width: 501px;
+    background: var(--bg-content); color: var(--fg-c-light);
+    border: 0; border-radius: 1px;
+    font-family: monospace,"Droid Sans", "Liberation Sans", "DejaVu Sans", "Segoe UI", Sans; font-size: 12pt;
+    padding: 4px 8px; height: 24px;
+}
+
+#more {
+    position: relative; bottom: 17px;
+    background: transparent; color: var(--fg-content); display: block; 
+    text-align: center; margin: 0 auto; width: 32px; height: 32px;
+    font-weight: bold; cursor: default;
+}
+    #plus {
+        border: 0; border-radius: 1px 1px 0 0; width: 32px; height: 32px; font-size: 12pt;
+        background: transparent; color: var(--fg-c-light); font-weight: bold; cursor: pointer;
+        transition: .2s ease-out;
+    }
+    #help {
+        display: block; visibility: hidden; width: 320px; cursor: default;
+        position: relative; left: -144px; right: 0; bottom: 1px; margin: auto;
+        font-family: monospace,"Anonymous Pro","PragmataPro", "Droid Sans Mono", "Liberation Sans Mono", "DejaVu Sans Mono", "Consolas", "Lucida Console", monospace;
+        padding: 8px; text-align: left; border-radius: 1px; opacity: 0;
+        background: var(--bg-content); color: var(--fg-content); transition: .2s ease-out;
+    }
+    #more:hover #plus { background: var(--bg-content); }
+    #more:hover #help { visibility: visible; opacity: 1; }
+        #note { width: 100%; height: 100px; resize: none; border: 0; outline: 0; }
+
+#menu {
+    width: 100%; height: 32px; margin: 0 auto;
+    background: transparent; color: var(--fg-content); cursor: default;
+}
+    #mnu                   { height: 32px; line-height: 32px; width: 648px; }
+
+    #menu ul               { display: inline-table; position: relative; left: 65px; bottom: -17px; list-style: none; }
+    #menu label            { padding: 0; display: inline-block; font-weight: bold; width: var(--menu-width); /* menu width */ }
+
+    #menu ul li            { float: left; border-radius: 0 0 1px 1px; height: 32px; text-align: center; transition: .2s ease-out; }
+    #menu ul li:hover      { background: var(--bg-content); color: var(--fg-c-light);  }
+    #menu ul li a          { display: block; white-space: nowrap; padding: 0 10px; }
+
+    #menu ul ul {
+        display: flex; flex-flow: column wrap; /* column | row(-reverse) */ align-content: flex-start;
+        visibility: hidden; opacity: 0; width: calc(var(--menu-width) * 4); /* cols */ height: calc(32px * 3); /* rows */
+        position: absolute; bottom: 100%; left: 0; z-index: 11;
+        background: var(--bg-content); border-radius: 1px; transition: .2s ease-out;
+    }
+    #menu ul li:hover > ul { bottom: 100%; visibility: visible; opacity: 1; z-index: 12; height: calc(32px * 3); /* rows */ }
+    #menu ul ul li { background: var(--bg-content); border-radius: 1px; height: 32px; text-align: left; width: var(--menu-width); /* menu width */ }
+
+    /* Menu Colors */
+    #menu ul #mnu_1 li:hover { background: var(--fg-mnu1); }
+    #menu ul #mnu_2 li:hover { background: var(--fg-mnu2); }
+    #menu ul #mnu_3 li:hover { background: var(--fg-mnu3); }
+    #menu ul #mnu_4 li:hover { background: var(--fg-mnu4); }
+
+    #menu img { position: relative; top: 3px; left: -3px; width: 16px; height: 16px; visibility: hidden; }
+</style>
+<script type="text/javascript" language="javascript">
+var $=function(id) { return document.getElementById(id); };
+
+var help="<ul> \
+    <li>Hompage modified from <u><a href=http://twily.info/firefox/homepage.html>Twily's homepage</a></u></li> \
+    <li>Sylveon drawn by <u><a href=http://peachmomo.deviantart.com/art/PKM-Sylveon-Gijinka-354764781>peachmomo</a></u></li> \
+</ul>";
+
+var search=[ // Search engines
+    ["",    "https://www.duckduckgo.com/?q="],                      // DuckDuckGo (Default)
+    ["!g",  "https://www.google.com/#q="],                          // Google
+    ["!i",  "https://www.google.com/search?tbm=isch&q="],           // Google Images
+<!--    ["!t",  "https://www.google.com/#q=translate+"],                // Google Translate -->
+<!--    ["!m",  "http://www.imdb.com/find?q="],                         // IMDb -->
+<!--    ["!w",  "http://en.wikipedia.org/w/index.php?search="],         // Wikipedia -->
+<!--    ["!y",  "https://www.youtube.com/results?search_query="],       // YouTube -->
+];
+
+var menu=[ // Menu titles
+    "news",                                                         // mnu_1
+    "webcomics",                                                    // mnu_2
+    "interwebs",                                                    // mnu_3
+    "other",                                                        // mnu_4
+];
+
+var showFavicon = true;                                             // Enable/Disable Link Favicons (img)
+var showPreview = true;                                             // Enable/Disable Link Hover Preview (iframe)
+
+// Link setup (separate with ["", "", ""],)
+// Format: ["Name", "URL", "Custom Favicon"],
+var links=[
+    // News -           mnu_1
+    ["nyt",                             "http://nytimes.com/",                  ""],
+    ["atlantic",                        "http://theatlantic.com/",              ""],
+    ["politico",                        "http://politico.com/",                 ""],
+    ["the onion",                       "http://theonion.com/",                 "http://assets.onionstatic.com/onion/static/images/favicon.ico"],
+    ["npr",                             "http://npr.org/",                      ""],
+    ["linux journal",                   "http://linuxjournal.com/",             ""],
+    ["mint",                            "http://linuxmint.com/",                ""],
+    ["boston globe",                    "https://www.bostonglobe.com/",         "https://www.bostonglobe.com/rw/SysConfig/WebPortal/BostonGlobe/Framework/images/favicon.ico"],
+    ["eff",                             "https://www.eff.org/",                 ""],
+    ["reuters",                         "http://www.reuters.com/",              ""],
+    ["torrentfreak",                    "http://torrentfreak.com",              ""],
+    ["economist",                       "http://www.economist.com/",            ""],
+
+    ["", "", ""],
+
+    // Webcomics -          mnu_2
+    ["xkcd",                            "https://xkcd.com/",                              ""],
+    ["floraverse",                      "http://floraverse.com/",                         "http://floraverse.com/static/images/favicon.png"],
+    ["smbc",                            "http://smbc-comics.com/",                        ""],
+    ["subnormality",                    "http://viruscomix.com/subnormality.html",        ""],
+    ["unsounded",                       "http://casualvillain.com/Unsounded/comic+index", ""],
+    ["riceboy",                         "http://rice-boy.com/",                           ""],
+    ["forbiddenflora",                  "http://forbiddenflora.com/",                     "http://forbiddenflora.com/static/images/favicon.png"],
+    ["dresden codak",                   "http://dresdencodak.com/archives/",              ""],
+    ["helvetica",                       "http://helvetica.jnwiedle.com/",                 ""],
+    ["chaoslife",                       "http://chaoslife.findchaos.com/",                ""],
+    ["ava's demon",                     "http://avasdemon.com/",                          ""],
+    ["oh joy",                          "http://ohjoysextoy.com/",                        ""],
+
+    ["", "", ""],
+
+    // Interwebs -  mnu_3
+    ["reddit",                          "https://www.reddit.com/",                        "https://www.reddit.com/favicon.ico"],
+    ["r/diy",                           "https://www.reddit.com/r/diy",                   "https://www.reddit.com/favicon.ico"],
+    ["r/unixporn",                      "https://www.reddit.com/r/unixporn",              "https://www.reddit.com/favicon.ico"],
+    ["r/data",                          "https://www.reddit.com/r/dataisbeautiful",       "https://www.reddit.com/favicon.ico"],
+    ["r/internet",                      "https://www.reddit.com/r/internetisbeautiful",   "https://www.reddit.com/favicon.ico"],
+    ["r/gonewild",                      "https://www.reddit.com/r/gonewild",              "https://www.reddit.com/favicon.ico"],
+    ["twitter",                         "https://twitter.com/login/",                     ""],
+    ["tumblr",                          "https://www.tumblr.com/",                        ""],
+    ["yiff",                            "https://theyiffgallery.com/",                    "http://d.theyiffgallery.com/KP-Projekt/favicon.ico"],
+    ["ywot",                            "http://www.yourworldoftext.com/",                ""],
+    ["youtube",                         "http://youtube.com",                             ""],
+    ["agar.io",                         "http://agar.io/",                                ""],
+
+    ["", "", ""],
+
+    // Other -          mnu_4
+    ["inbox",                           "http://www.google.com/inbox/",                   "http://www.google.com/inbox/favicon.png"],
+    ["protonmail",                      "https://protonmail.ch/inbox",                    "https://protonmail.ch/assets/favicon_57.png"],
+    ["gmail",                           "https://mail.google.com/",                       "https://ssl.gstatic.com/ui/v1/icons/mail/images/favicon5.ico"],
+    ["drive",                           "https://www.google.com/intl/en/drive/",          "https://www.google.com/intl/en/drive/images/drive/favicon.ico"],
+    ["github",                          "https://github.com/",                            ""],
+    ["ercas github",                    "https://github.com/ercas",                       ""],
+    ["terminal.sexy",                   "http://terminal.sexy/",                          ""],
+    ["lainchan",                        "https://lainchan.org/",                          "https://lainchan.org/favicon.png"],
+    ["/cyb/",                           "https://lainchan.org/cyb/",                      "https://lainchan.org/favicon.png"],
+    ["stylish",                         "http://userstyles.org/",                         ""],
+    ["lewd",                            "https://lewd.sx",                                "https://lewd.sx/heart.png"],
+    ["Wallhaven",                       "http://alpha.wallhaven.cc",                      ""],
+];
+
+var i,ss="";
+function init() {
+    for(i=0;i<search.length;i++) if(search[i][0]=="") ss=search[i][1];
+    if(ss=="") alert("Error: Missing default search engine!");
+
+    $('help').innerHTML=help;
+    if(localStorage.getItem('note')!=null) if(localStorage.getItem('note').length!=0) toggleNote();
+    build();
+
+    if(showPreview) preview(0,0);
+    $('q').value="";
+    $('q').focus();
+}
+
+function build() { // Build menu
+    $('mnu').innerHTML="";
+
+    for(i=0;i<menu.length;i++) { // Menu titles
+        $('mnu').innerHTML+="<li><label>"+menu[i]+"</label>\n<ul id=\"mnu_"+(i+1)+"\"></ul></li>";
+    }
+
+    var m=1,skip=false;
+    for(i=0;i<links.length;i++) { // Menu links
+        if(links[i][0]=="" && links[i][1]=="") skip=true;
+
+        if(!skip) {
+            var prev="",printimg="";
+
+            if(showFavicon) {
+                var favicon;
+                if(links[i][2]!="") favicon=links[i][2];
+                else                favicon=getFavicon(links[i][1]);
+
+                printimg="<img id=\"img_"+i+"\" src=\""+favicon+"\""+" onload=\"javascript:this.style.visibility='inherit';\" /> ";
+            }
+            if(showPreview) {
+                prev=" onmouseover=\"javascript:preview(1,this.href);\" onmouseout=\"javascript:preview(0,0);\"";
+            }
+
+            $('mnu_'+m).innerHTML+="<li><a href=\""+links[i][1]+"\" target=\"_self\""+prev+">"+printimg+links[i][0]+"</a></li>";
+        } else {
+            skip=false; m++;
+        }
+    }
+}
+
+/*
+    Optional patch for using "!i" before the search query: http://pastebin.com/Lw24tQ81
+*/
+function handleQuery(e,q) { // Handle search query
+    var key=e.keyCode || e.which;
+
+    if(key==13) { // Enter
+        var x=q.lastIndexOf("!");
+
+        if(x!=-1 && x>=q.length-2) {
+            for(i=0;i<search.length;i++) {
+                if(search[i][0]==q.substr(x)) { // Find "*!i"
+                    window.location=search[i][1]+q.substr(0,x).replace(/&/g,"%26");
+                    return true;
+                }
+            }
+            // Invalid "!i", use default
+            window.location=ss+q.substr(0,x).replace(/&/g,"%26");
+        } else {
+            // "!i" where not specified, use default
+            window.location=ss+q.replace(/&/g,"%26");
+        }
+    }
+}
+
+function getFavicon(url) {
+    var l=document.createElement("a");
+    l.href=url;
+
+    return l.protocol+"//"+l.hostname+"/favicon.ico";
+}
+
+function toggleNote() {
+    if($('note')==null) {
+        $('help').innerHTML="<textarea id='note' spellcheck='false' placeholder='Store temporary note...'></textarea>";
+        if(localStorage.getItem('note')!=null) $('note').value=localStorage.getItem('note');
+        $('note').addEventListener('change',function() { localStorage.setItem('note',$('note').value); });
+        $('plus').value="-";
+        $('note').focus();
+    } else {
+        $('help').innerHTML=help;
+        $('plus').value="+";
+        $('q').focus();
+    }
+}
+
+var pT;
+function preview(c,x) {
+    clearTimeout(pT);
+    switch(c) {
+        case 0: // mouseout
+            $('overlay').style.opacity=1;
+            pT=setTimeout(function() { $('preview').src="about:blank"; },500);
+            break;
+        case 1: // mouseover
+            pT=setTimeout(function() { $('preview').src=x; },100);
+            break;
+        default: // load
+            if($('preview').src!="about:blank") $('overlay').style.opacity=.75;
+    }
+}
+</script>
+</head>
+<body onload="javascript:init();">
+
+<iframe id="preview" src="about:blank" onload="javascript:preview(2,0)" frameborder="0"></iframe>
+<div id="overlay"></div>
+
+<div id="center">
+    <div id="content">
+        <div id="menu">
+            <ul id="mnu"></ul>
+        </div>
+        <br />
+        <input type="text" id="q" value="" placeholder="search..." onkeypress="javascript:handleQuery(event,this.value);" onfocus="this.value=this.value" />
+        <br /><br />
+        <div id="more">
+            <input type="button" id="plus" value="+" onclick="javascript:toggleNote();" />
+            <br />
+            <div id="help"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+  <body>
+    <!-- Use of this code assumes agreement with the Google Custom Search Terms of Service. -->
+    <!-- The terms of service are available at http://www.google.com//cse/docs/tos.html -->
+    <form name="google_searchbox" id="searchbox" action="https://www.google.com/search">
+      <input type="hidden" name="cref" value="" />
+      <input type="hidden" name="ie" value="utf-8" />
+      <input type="hidden" name="hl" value="" />
+      <input name="q" type="text" size="40" />
+  </body>
+</html> 

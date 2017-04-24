@@ -1,0 +1,49 @@
+=============== Mar 5, 2016 (EST) ===============
+10:01:04.884487 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+10:01:04.884690 db@open opening
+10:01:04.985735 db@janitor F·2 G·0
+10:01:04.985770 db@open done T·101.066217ms
+10:01:04.987071 memdb@flush N·0 S·0B
+10:01:04.987095 memdb@flush skipping
+10:01:04.987154 journal@remove removed @1
+10:01:04.987234 table@compaction range L-1 "":""
+10:31:26.799983 memdb@flush N·22 S·2KiB
+10:31:26.898315 memdb@flush created L2@4 N·22 S·495B "\x03Y5..een,v22":"\x03Y5..een,v1"
+10:31:26.987122 memdb@flush committed F·1 T·187.061455ms
+10:31:26.987202 journal@remove removed @2
+10:31:26.988120 memdb@flush N·2 S·12MiB
+10:31:27.575688 memdb@flush created L2@6 N·2 S·10MiB "\x00de...gz,v23":"\x01de...gz,v24"
+10:31:27.708930 memdb@flush committed F·1 T·720.74203ms
+10:31:27.711181 journal@remove removed @3
+13:12:32.450109 memdb@flush N·40 S·3KiB
+13:12:32.557342 memdb@flush created L1@8 N·40 S·800B "\x00de...gz,d62":"\x03Y5..een,v25"
+13:12:32.635147 memdb@flush committed F·1 T·184.928426ms
+13:12:32.635223 journal@remove removed @5
+13:12:32.638567 memdb@flush N·2 S·12MiB
+13:12:33.434385 memdb@flush created L0@10 N·2 S·10MiB "\x00de...gz,v65":"\x01de...gz,v66"
+13:12:33.701074 memdb@flush committed F·1 T·1.062389481s
+13:12:33.705427 journal@remove removed @7
+13:13:25.155699 memdb@flush N·4 S·404B
+13:13:25.334011 memdb@flush created L0@12 N·4 S·302B "\x00de...gz,d69":"\x03Y5..een,v67"
+13:13:25.522919 memdb@flush committed F·1 T·367.109402ms
+13:13:25.523002 journal@remove removed @9
+13:13:25.523802 memdb@flush N·2 S·12MiB
+13:13:26.266601 memdb@flush created L0@14 N·2 S·10MiB "\x00de...gz,v71":"\x01de...gz,v72"
+13:13:26.444405 memdb@flush committed F·1 T·920.548691ms
+13:13:26.446629 journal@remove removed @11
+13:17:56.891378 table@compaction L0·3 -> L1·1 S·20MiB Q·78
+13:17:57.461674 table@build created L1@15 N·1 S·10MiB "\x00de...gz,v71":"\x00de...gz,v71"
+13:17:57.551067 table@build created L1@16 N·2 S·287B "\x01de...gz,v72":"\x03Y5..een,v70"
+13:17:57.684169 table@compaction committed F-2 S-10MiB Ke·0 D·45 T·792.733745ms
+13:17:57.686075 table@remove removed @14
+13:17:57.686113 table@remove removed @12
+13:17:57.687579 table@remove removed @10
+13:17:57.687610 table@remove removed @8
+15:38:52.848373 memdb@flush N·49 S·4KiB
+15:38:52.930912 memdb@flush created L0@18 N·49 S·924B "\x00de...gz,d120":"\x03Y5..een,v73"
+15:38:53.019692 memdb@flush committed F·1 T·171.207013ms
+15:38:53.019777 journal@remove removed @13
+15:38:53.022145 memdb@flush N·2 S·12MiB
+15:38:53.909839 memdb@flush created L0@20 N·2 S·10MiB "\x00de...gz,v122":"\x01de...gz,v123"
+15:38:54.453562 memdb@flush committed F·1 T·1.431344682s
+15:38:54.455949 journal@remove removed @17
