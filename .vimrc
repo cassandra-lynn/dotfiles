@@ -23,6 +23,8 @@
     set showmatch       " When a bracket is inserted, briefly jump to the match.
     set ruler           " Show the line and column number of the cursor.
     set cursorline      " Puts a line under the line the cursor is on.
+    set wildmode=longest,list,full
+    set wildmenu
 " searching options
     set hlsearch        " Highlight all matches of a search pattern
     set incsearch       " While typing a search command, immediately show matches
