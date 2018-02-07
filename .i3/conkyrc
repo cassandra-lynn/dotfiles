@@ -1,5 +1,6 @@
 -- vim: ts=4 sw=4 noet ai cindent syntax=lua
 conky.config = {
+	use_xft = true,
 	background = false,
 	out_to_console = true,
 	out_to_x = false,
@@ -10,12 +11,9 @@ conky.config = {
 	override_utf8_locale = true
 }
 
-conky.text = [[
-	[
-    	{"full_text": "${execi 4 ~/.i3/conky-helpers/pluggedin} ${execi 8 upower -i $(upower -e | grep BAT) | grep percent | awk -F ' ' '{print $2}'}", "color":"\#ffffff"},
-    	{"full_text": "💾 ${memperc}%", "color":"\#ffffff"},
-    	{"full_text": "💻 ${cpu}%", "color":"\#ffffff"},
-    	{"full_text": "🌡${execi 8 ~/.i3/conky-helpers/cputemp}°C", "color":"\#ffffff"},
-		{"full_text": "${time %a, %b %e, %Y at %I:%M:%S %p}","color": "\#ffffff"}
-	],
-]]
+conky.text = [[ foobar ]]
+
+--    	{"full_text": "${execi 4 ~/.i3/conky-helpers/pluggedin} ${execi 8 upower -i $(upower -e | grep BAT) | grep percent | awk -F ' ' '{print $2}'}", "color":"\#ffffff"},
+--    	{"full_text": "💾 ${memperc}%", "color":"\#ffffff"},
+--    	{"full_text": "🌡${execi 8 ~/.i3/conky-helpers/cputemp}°C", "color":"\#ffffff"},
+--		{"full_text": "${time %a, %b %e, %Y at %I:%M:%S %p}","color": "\#ffffff"}

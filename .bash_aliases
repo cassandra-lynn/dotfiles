@@ -14,3 +14,5 @@
     alias screenfetch="clear; screenfetch 2>/dev/null"
     alias ..="cd .."
     alias python="python3"
+    alias start="startx"
+    alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep percent | awk -F ' ' '{print }'"

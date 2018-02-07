@@ -183,6 +183,6 @@ man() {
         fi
         # sets brightness to 7, of course
         #if ps aux | grep -v "grep" | grep -q "logbrightnessd"; then
-            bash brightness 5
+            bash brightness 7
         #fi
     fi
