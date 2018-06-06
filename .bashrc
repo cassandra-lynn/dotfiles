@@ -136,7 +136,6 @@ EOF
     function vim() {
         if [ -z "$@" ]; then
             /usr/bin/vim /tmp/scratch
-            rm -rf /tmp/scratch
         else
             /usr/bin/vim $@
         fi
