@@ -35,7 +35,7 @@
     set directory=~/.vim/swap//
     set undodir=~/.vim/undo//
 " colors!
-    colorscheme minimalist
+    colorscheme seattle
     let &colorcolumn=81 " highlight 81st column
     "let &cursorcolumn=80 " Vertical column highlighting the cursor
     "highlight ColorColumn cterm=none ctermbg=236
